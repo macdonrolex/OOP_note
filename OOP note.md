@@ -721,6 +721,8 @@ public class Point
 // Point p2 = new Point(3, 4);
 // Point p3 = p1 + p2; // Translates to: Point.op_Addition(p1, p2) under the hood
 ```
+# Delegation
+# SOLID
 
 # Quiz
 ## Week1 Quiz
@@ -1010,6 +1012,9 @@ int main() {
 Explain in a paragraph or two, whether you would use inheritance between the Employee and Logger, or Composition.  
 
 **Ans:**
+I'd choose Composition because the functionalities in Logger might not just for Employees. They could be used on other classes such as Customer. If we use inheritance, we are going to limit the reusability of Logger.  
+Inheritance represent IS-A relations ship. An Employee should NOT be a logger. 
+It is more reasonable to have an employee has a logger.
 
 
 ### 2.
@@ -1017,6 +1022,9 @@ Explain in a paragraph or two, whether you would use inheritance between the Emp
 
 
 **Ans:**
+I would use inheritance because this represent a clear "IS-A" relationship. An 
+`ImageButton` is a special type of `GUIBotton`. We can inherits those core functionality from `GUIBotton`, and thus improve reusability. Furthermore we can
+over ride some functions for specific use cases.
 
 ### 3.
 >Tell me what will happen on the console when this is called:
@@ -1035,7 +1043,7 @@ int main() {
     return 0;
 }
 ```
-**Ans:**
+**Ans:** Console will print out `Dog.Speak()`, `Duck.Speak()`. It is a demonstration of heterogeneous collections.
 
 ## Week8 Quiz
 

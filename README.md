@@ -1,1 +1,1 @@
-OOP note
+Please open OOP note.md to read the note.

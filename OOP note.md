@@ -207,7 +207,7 @@ public:
 	- A change in the base class can ripple through the entire hierarchy.
 - Needs to worry about LSP
 	- Child must be able to do all parent's operations.
-- For the true "IS-A" relationship and interface
+- Only use for the true "IS-A" relationship and interface
 
 **Composition:**
 - **Flexiable assembly**
@@ -542,14 +542,14 @@ class Program
 
 C++ does not have a separate interface keyword, but it supports the interface concept using virtual functions
 ```cpp
-class Vehicle 
+class IVehicle 
 {
 public:
     virtual void Start() = 0; // pure virtual function
     virtual ~Vehicle() = default; // virtual destructor
 };
 
-class Car : public Vehicle
+class Car : public IVehicle
 {
 public:
 	void Start() override
@@ -745,7 +745,76 @@ public class Point
 // Point p3 = p1 + p2; // Translates to: Point.op_Addition(p1, p2) under the hood
 ```
 # Delegation
+>delegate the task to another object.  
+It essentially is passing in a **function pointer** to which it will go to that 
+function.
+
+The delegation design pattern is **an alternative to inheritance for achieving 
+code reuse**. It promotes object composition by having one object (the delegator 
+or container class) forward, or delegate a request to a second object (the
+ delegate or helper class)
+
+```c#
+// Delegator
+public class Waiter
+{
+	// Define delegation signature
+	public delegate void CookAction(String name);
+
+	// A field to store the delegated function
+	private readonly CookAction _cook;
+
+	// Constructor: when a waiter is created, he needs to know
+	// which type of action(fry or bake) should the kitchen do
+	public Waiter(CookAction cookMethod)
+	{
+		_cook = cookMethod;
+	}
+
+	// Waiter's job: take the order
+	public void TakeOrder(string dishName)
+	{
+		// now _cook is the action(method) passed in wiled construction.
+		_cook(dishName);
+		Console.WriteLine($"Here is your {dishName}!");
+	}
+	
+
+}
+// Concrete behavior
+public static class Kitchen
+{
+	public static void Fry(string dishName)
+	{
+		Console.WriteLine($"The chef is frying {dishName}!");
+	}
+	public static void Bake(string dishName)
+	{
+		Console.WriteLine($"The chef is baking {dishName}!");
+	}
+}
+
+public class Program
+{
+	public static void Main()
+	{
+		// Pass in the function so the waiter knows what to do
+		var wFry = new Waiter(Kitchen.Fry);
+		wFry.TakeOrder("Fried Chicken");
+
+		var wBake = new Waiter(Kitchen.Bake);
+		wBake.TakeOrder("Pie");
+	}
+}
+```
 # SOLID
+## S - Single Responsibility Principle (SRP)
+## O - Open/Closed Principle (OCP)
+## L - Liskov Substitution Principle (LSP)
+## I - Interface Segregation Principle (ISP)
+## D - Dependency Inversion Principle (DIP)
+
+
 
 # Quiz
 ## Week1 Quiz

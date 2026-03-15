@@ -199,6 +199,27 @@ public:
     }
 };
 ```
+## Inheritance vs Composition
+**Inheritance:**
+- **Rigid hierarchy**
+	- Con: Inheritance can trap you in a brittle class tree.
+- Couples child classes tightly to the parent.
+	- A change in the base class can ripple through the entire hierarchy.
+- Needs to worry about LSP
+	- Child must be able to do all parent's operations.
+- For the true "IS-A" relationship and interface
+
+**Composition:**
+- **Flexiable assembly**
+	- Con: Composition can make things overly fragmented if a true subtype relationship existed.
+- Isolates behavior into components.
+	- A change in one component rarely breaks others.
+
+**Take away:**
+- Inheritance reuses code only when **the world fits into a strict hierarchy**.
+- Composition reuses code whenever you want to **attach a capability**.
+	- Composition wins for reusability because capabilities are reusable in far more contexts than types.
+
 ## Dependency injection
 > An object doesn't create what it need. Instead, it depends on external source.
 
@@ -645,6 +666,7 @@ operator takes. For instance, "+" needs 2 operands, and "!" needs 1.
 	- The left side(A) invokes the method 
 	- The method only needs B as parameter because A was passed as the hidden
 	`this` pointer.
+	- We don't need to return a new object cause we are modifying "this".
 ```cpp
 class Point {
 public:
@@ -656,6 +678,7 @@ public:
     // The left operand is 'this', so we only pass the right operand ('other').
     Point operator+(const Point& other) {
         // We can access our own x and y, plus the other's x and y
+		// Don't return new
         return Point(this->x + other.x, this->y + other.y); 
     }
 };
@@ -1093,13 +1116,15 @@ public:
 	}
 }
 /*
-Triangle operator+(const Triangle& other) const override the basic + operator. Now if we perform Triangle1 + Triangle2, it will return a new Triangle with sums of heights and bases in the two Triangles.
+Triangle operator+(const Triangle& other) const override the basic + operator.   
+Now if we perform Triangle1 + Triangle2, it will return a new Triangle with sums 
+of heights and bases in the two Triangles.
 */
 ```
 
 ## Week 9 Quiz
 ### 1. What is the primary purpose of an interface in C#?
-- To define a contract that classes must implement 
+- **To define a contract that classes must implement**
 - To Automatically generate method bodies for subclasses 
 - To store shared fields for derived classes 
 - To provide multiple Inheritance of implementation 
@@ -1107,15 +1132,25 @@ Triangle operator+(const Triangle& other) const override the basic + operator. N
 **Ans:**
 The correct answer is: To define a contract that classes must implement.
 
-In C#, an interface acts as a blueprint or a "contract." When a class implements an interface, it is essentially making a promise that it will provide an implementation for all the methods, properties, or events defined within that interface.
+In C#, an interface acts as a blueprint or a "contract." When a class implements 
+an interface, it is essentially making a promise that it will provide an 
+implementation for all the methods, properties, or events defined within 
+that interface.
 
 Why the other options are incorrect:
 
-- To automatically generate method bodies: Interfaces (traditionally) do not provide the implementation; they only define the signature. The class itself is responsible for writing the code inside the method.
+- To automatically generate method bodies: Interfaces (traditionally) do not 
+provide the implementation; they only define the signature. The class itself is 
+responsible for writing the code inside the method.
 
-- To store shared fields: Interfaces cannot contain instance fields (variables). If you need to share fields between classes, you would typically use an Abstract Class instead.
+- To store shared fields: Interfaces cannot contain instance fields (variables). 
+If you need to share fields between classes, you would typically use an Abstract 
+Class instead.
 
-- To provide multiple inheritance of implementation: C# does not support multiple inheritance of classes (inheriting code from more than one parent). However, a class can implement multiple interfaces, allowing it to follow multiple "contracts" at once.
+- To provide multiple inheritance of implementation: C# does not support 
+multiple inheritance of classes (inheriting code from more than one parent). 
+However, a class can implement multiple interfaces, allowing it to follow 
+multiple "contracts" at once.
 
 ### 2. Look at the code below. It uses a design pattern we talked about last week. What is it and what does this pattern do? What does this code snippet do?
 ```c#
@@ -1171,7 +1206,8 @@ public class Program
 ```
 **Ans:**
 It is a delegate pattern, as it is delegate the task to another object.  
-It essentially is passing in a function pointer to which it will go to that function. 
+It essentially is passing in a function pointer to which it will go to that 
+function. 
 
 
 ### 3. Try to explain what these two assertions mean:
@@ -1181,18 +1217,19 @@ It essentially is passing in a function pointer to which it will go to that func
 It is a metaphor:
 
 Tall Tree - 
-
 A class extends another class, which extends another, forming a
-single upward path
-.
-Each level depends on the one above it.
-Lego - 
+single upward path. Each level depends on the one above it.
 
+Lego - 
 You build objects by combining smaller objects.
 
->my
+**my answer**  
+Inheritance is like building with a tall Tree because there is a hierarchical 
+relationship between each classes. The higher level classes provide basic 
+functions, and lower level classes provide additional.
 
-Inheritance is like building with a tall Tree because there is a hierarchical relationship between each classes. The higher level classes provide basic functions, and lower level classes provide additional.
 
-
-Composition is like building with Lego’s because the relationship between each classes is not limited. It is not necessary for a class to provide some fields or functions that other classes have.
+Composition is like building with Lego’s because the relationship between each 
+classes is not limited. It is not necessary for a class to provide some fields 
+or functions that other classes have. A class can simply expand its 
+functionality by attach other classes, just like placing a LEGO brick on it

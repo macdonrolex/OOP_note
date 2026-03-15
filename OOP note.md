@@ -808,11 +808,29 @@ public class Program
 }
 ```
 # SOLID
-## S - Single Responsibility Principle (SRP)
-## O - Open/Closed Principle (OCP)
-## L - Liskov Substitution Principle (LSP)
-## I - Interface Segregation Principle (ISP)
-## D - Dependency Inversion Principle (DIP)
+**S - Single Responsibility Principle (SRP)**  
+- The class should only have one job.
+
+**O - Open/Closed Principle (OCP)**  
+- Extensibility
+- Software entities (classes, modules, functions) should be **open for extension**, but **closed for modification**.
+- You should be able to add new functionality(open) without altering existing code(closed), tested code.
+- "If I need to add a new type of discount, do I have to modify my existing calculator code?"
+
+**L - Liskov Substitution Principle (LSP)**  
+- Subtypes must be **substitutable for their base types without altering the correctness** of the program.
+- If class B inherits from class A, you should be able to pass class B into any function that expects class A, and the program shouldn't crash or behave weirdly.
+
+**I - Interface Segregation Principle (ISP)**
+- Clients should not be forced to depend upon interfaces that they do not use.
+- Your contracts(intefaces) shouldn't be massive. It is **better to have many small, specific interfaces than one giant, generic one**.
+
+**D - Dependency Inversion Principle (DIP)**
+- Decouple to increase flexibility.
+- Depend upon abstractions (interfaces), not concretions (specific classes).
+	- High-level modules (the core logic of your app) shouldn't depend directly on low-level modules (like a database or a specific API). **Both should depend on an abstraction**.
+	- High-level dictates the rules(interfaces), and low-level code must follow the rules.
+- "Does my core checkout logic break if the third-party payment API goes offline or changes its code?"
 
 
 

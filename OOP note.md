@@ -119,8 +119,6 @@ single, well-defined purpose.
  
 
 # OOP Relationships
-> Briefly describe what "Design as a Contract" means and why it matters.
----
 ## Containment (Holds a)
 > “holds-a” means uses but does not own.
 

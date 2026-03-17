@@ -744,13 +744,10 @@ public class Point
 ```
 # Delegation
 >delegate the task to another object.  
-It essentially is passing in a **function pointer** to which it will go to that 
-function.
+Instead of an object performing a task itself, it holds a reference to another object or method, and asks that object or method to do the work.
 
 The delegation design pattern is **an alternative to inheritance for achieving 
-code reuse**. It promotes object composition by having one object (the delegator 
-or container class) forward, or delegate a request to a second object (the
- delegate or helper class)
+code reuse**. It promotes object composition by having one object (the delegator or container class) forward, or delegate a request to a second object (the delegate or helper class)
 
 ```c#
 // Delegator
@@ -807,7 +804,7 @@ public class Program
 ```
 # SOLID
 **S - Single Responsibility Principle (SRP)**  
-- The class should only have one job.
+- The class should only has one job.
 
 **O - Open/Closed Principle (OCP)**  
 - Extensibility
